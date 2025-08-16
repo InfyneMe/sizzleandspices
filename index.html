@@ -3,191 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Restaurant</title>
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet"> -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-
-
-
+    <title>Sizzle and Spice - Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Basic Reset */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        body, html { 
-            height: 100%; 
-            font-family: 'Georgia', serif; 
-            overflow-x: hidden;
-        }
-        
 
-    .hero-section a:hover {
-        background: rgba(244,208,63,0.25);
-        box-shadow: 0 0 25px rgba(244,208,63,0.4);
-        transform: translateY(-2px);
-    }
-        /* Background Image with Overlay */
-       .video-background {
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+
+        /* Video Background - Keep Same */
+        .video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
             z-index: -1;
-            filter: brightness(0.5);
         }
-        /* Navigation Menu */
-        nav {
-            position: fixed;
-            top: 0;
+
+        .background-video {
             width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 20px 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
         }
 
-        nav ul {
-            list-style: none;
+        /* Enhanced Overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(220, 38, 38, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(251, 146, 60, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%);
+            z-index: 1;
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 2;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            gap: 50px;
+            align-items: center;
+            height: 100vh;
+            padding: 2rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 14px;
-            transition: color 0.3s ease;
+        /* Premium Brand Typography */
+        .brand-container {
+            margin-bottom: 4rem;
             position: relative;
         }
 
-        nav a:hover {
-            color: #d4af37;
+        .brand-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 12vw, 8rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 20%, #f1c40f 40%, #e67e22 60%, #c0392b 80%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+            line-height: 0.9;
+            position: relative;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+            animation: brandGlow 4s ease-in-out infinite alternate;
         }
 
-        nav a::after {
+        .brand-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.875rem, 2vw, 1.125rem);
+            font-weight: 500;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .brand-subtitle::before,
+        .brand-subtitle::after {
             content: '';
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 50%;
-            background-color: #d4af37;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
+            top: 50%;
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
         }
 
-        nav a:hover::after {
-            width: 100%;
+        .brand-subtitle::before {
+            left: -80px;
         }
 
-        /* Hero Content */
-        .hero-content {
-            margin-top: 100px;
-            max-width: 800px;
-            padding: 0 20px;
+        .brand-subtitle::after {
+            right: -80px;
         }
 
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            font-weight: 300;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: fadeInUp 1s ease forwards;
+        @keyframes brandGlow {
+            0% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1)); }
+            100% { filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.2)); }
         }
 
-        .hero-content .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #d4af37;
-            font-style: italic;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.3s forwards;
+        /* Coming Soon Section */
+        .coming-soon-container {
+            margin-bottom: 3rem;
+            position: relative;
         }
 
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
+        .coming-soon-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            position: relative;
+        }
+
+        .coming-soon-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
             line-height: 1.6;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.6s forwards;
+            max-width: 600px;
+            margin: 0 auto 3rem;
         }
 
-        /* Call to Action Button */
-        .cta-button {
-            background: linear-gradient(45deg, #d4af37, #f4d03f);
-            border: none;
-            padding: 18px 40px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #000;
-            border-radius: 50px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.9s forwards;
+        /* Premium Notify Section */
+        .notify-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.5);
-            background: linear-gradient(45deg, #f4d03f, #d4af37);
+        .notify-form {
+            position: relative;
+            margin-bottom: 2rem;
         }
 
-        /* Secondary Buttons */
-        .secondary-buttons {
-            margin-top: 30px;
+        .input-group {
+            position: relative;
             display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeInUp 1s ease 1.2s forwards;
-        }
-
-        .secondary-btn {
-            background: transparent;
-            border: 2px solid white;
-            padding: 12px 30px;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 60px;
+            padding: 8px;
             transition: all 0.3s ease;
         }
 
-        .secondary-btn:hover {
-            background: white;
-            color: #000;
-            transform: translateY(-2px);
+        .input-group:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* Animations */
+        .input-group.focused {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(251, 146, 60, 0.5);
+            box-shadow: 0 0 0 4px rgba(251, 146, 60, 0.1);
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .email-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .notify-button {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #f59e0b, #ea580c, #dc2626);
+            border: none;
+            border-radius: 50px;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 140px;
+        }
+
+        .notify-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .notify-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(245, 158, 11, 0.3);
+        }
+
+        .notify-button:hover::before {
+            left: 100%;
+        }
+
+        .notify-button:active {
+            transform: translateY(0);
+        }
+
+        /* Success Message */
+        .success-message {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.15));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            backdrop-filter: blur(10px);
+            color: #10b981;
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            margin-top: 1rem;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .success-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Decorative Elements */
+        .decorative-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: moveLine 8s linear infinite;
+        }
+
+        .line-1 {
+            width: 200px;
+            height: 1px;
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .line-2 {
+            width: 150px;
+            height: 1px;
+            top: 60%;
+            animation-delay: 3s;
+        }
+
+        .line-3 {
+            width: 100px;
+            height: 1px;
+            top: 80%;
+            animation-delay: 6s;
+        }
+
+        @keyframes moveLine {
+            0% { left: -200px; opacity: 0; }
+            50% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+
+        /* Social Links */
+        .social-section {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .social-text {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(251, 146, 60, 0.2), rgba(220, 38, 38, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .social-link svg {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            .brand-subtitle::before,
+            .brand-subtitle::after {
+                display: none;
+            }
+
+            .social-section {
+                bottom: 2rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .social-text {
+                font-size: 0.75rem;
+            }
+
+            .input-group {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .notify-button {
+                width: 100%;
+            }
+        }
+
+        /* Animation delays for stagger effect */
+        .brand-container {
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .coming-soon-container {
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .notify-container {
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        .social-section {
+            animation: fadeInUp 1s ease-out 1.4s both;
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -195,166 +423,169 @@
             }
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-                letter-spacing: 2px;
-            }
-            
-            .hero-content .subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .hero-content p {
-                font-size: 1rem;
-            }
-            
-            nav ul {
-                gap: 30px;
-                padding: 0 20px;
-            }
-            
-            nav a {
-                font-size: 12px;
-            }
-            
-            .cta-button {
-                padding: 15px 30px;
-                font-size: 1rem;
-            }
-            
-            .secondary-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
+        /* Subtle floating animation */
+        .brand-container {
+            animation: fadeInUp 1s ease-out 0.2s both, float 6s ease-in-out infinite;
         }
 
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-            
-            nav ul {
-                gap: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-        }
-
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0;
-            animation: fadeInUp 1s ease 1.5s forwards, bounce 2s infinite 2.5s;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
-     <video autoplay muted loop playsinline class="video-background">
-        <source src="v4.mp4" type="video/mp4">
-        <source src="v2.mp4" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
-    <!-- Navigation -->
-    <!-- <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#menu">Menu</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#reservations">Reservations</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav> -->
-
-    <!-- Hero Section -->
-    <section class="hero-section" style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; z-index: 1; padding: 0 20px;">
+    <!-- Video Background - Kept Same -->
+    <div class="video-container">
+        <video class="background-video" autoplay muted loop playsinline>
+            <source src="v5.mp4" type="video/mp4">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f59e0b, #dc2626);"></div>
+        </video>
+    </div>
     
-    <div class="hero-content" style="max-width: 850px; margin: 0 auto;">
-        
-        <!-- Brand Name -->
-        <h1 style="font-family: 'Great Vibes', cursive; color: #ff7977; font-size: 7rem; font-weight: 400; text-transform: lowercase; text-shadow: 3px 3px 10px rgba(0,0,0,0.85); white-space: nowrap; margin-bottom: 15px;">
-            Sizzle and spice
-        </h1>
-
-        <!-- Decorative Coming Soon -->
-        <div style="display: inline-flex; align-items: center; gap: 12px; margin-bottom: 18px;">
-            <span style="flex: 1; height: 1px; background: rgba(244,208,63,0.6); max-width: 50px;"></span>
-            <span style="font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase; color: #f4d03f; font-weight: 600;">
-                coming soon
-            </span>
-            <span style="flex: 1; height: 1px; background: rgba(244,208,63,0.6); max-width: 50px;"></span>
+    <div class="overlay"></div>
+    
+    <!-- Decorative Elements -->
+    <div class="decorative-lines">
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+        <div class="line line-3"></div>
+    </div>
+    
+    <div class="container">
+        <!-- Brand Section -->
+        <div class="brand-container">
+            <h1 class="brand-title">Sizzle & Spice</h1>
+            <p class="brand-subtitle">Culinary Excellence</p>
         </div>
-
-        <!-- Spicy Tagline -->
-        <h2 style="font-size: 1.8rem; font-weight: 400; margin-bottom: 35px; color: rgba(255,255,255,0.92); text-shadow: 2px 2px 8px rgba(0,0,0,0.6); font-style: italic;">
-            Where flavor dances with fire
-        </h2>
-
-        <!-- Premium CTA Button -->
-        <a href="#reservations" 
-           style="display: inline-block; background: linear-gradient(135deg, rgba(244, 208, 63, 0.2), rgba(243, 156, 18, 0.2)); padding: 14px 40px; border: 1px solid #f4d03f; border-radius: 35px; color: #f4d03f; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; text-decoration: none; box-shadow: 0 0 15px rgba(244,208,63,0.2); transition: all 0.4s ease;">
-            notify me
-        </a>
+        
+        <!-- Coming Soon Section -->
+        <div class="coming-soon-container">
+            <h2 class="coming-soon-title">Coming Soon</h2>
+            <p class="coming-soon-subtitle">
+                An extraordinary culinary journey awaits. We're crafting something exceptional that will redefine your dining experience. Be among the first to discover what's cooking.
+            </p>
+        </div>
+        
+        <!-- Notify Section -->
+        <div class="notify-container">
+            <form class="notify-form" id="notifyForm">
+                <div class="input-group" id="inputGroup">
+                    <input 
+                        type="email" 
+                        class="email-input" 
+                        placeholder="Enter your email address" 
+                        required
+                        id="emailInput"
+                    >
+                    <button type="submit" class="notify-button" id="notifyButton">
+                        Notify Me
+                    </button>
+                </div>
+            </form>
+            <div class="success-message" id="successMessage">
+                ✨ Perfect! You'll be the first to experience our launch.
+            </div>
+        </div>
     </div>
-
-    <!-- Scroll Indicator -->
-    <div class="scroll-indicator" style="margin-top: 60px; font-size: 0.9rem; color: rgba(255,255,255,0.75); opacity: 0.8;">
-        Scroll to explore ↓
-    </div>
-</section>
-
-<!-- Google Fonts -->
-
-
-<!-- Google Fonts: Great Vibes -->
-
-
+    
+    <!-- Social Section -->
+    <!-- <div class="social-section">
+        <span class="social-text">Follow Our Journey</span>
+        <div class="social-links">
+            <a href="#" class="social-link" title="Instagram" aria-label="Instagram">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+            </a>
+            <a href="#" class="social-link" title="Twitter" aria-label="Twitter">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+            </a>
+            <a href="#" class="social-link" title="Facebook" aria-label="Facebook">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+        </div>
+    </div> -->
 
     <script>
-        // Add scroll effect to navigation
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.background = 'rgba(0, 0, 0, 0.95)';
-                nav.style.padding = '15px 0';
-            } else {
-                nav.style.background = 'rgba(0, 0, 0, 0.8)';
-                nav.style.padding = '20px 0';
+        // Enhanced form interactions
+        const inputGroup = document.getElementById('inputGroup');
+        const emailInput = document.getElementById('emailInput');
+        const notifyForm = document.getElementById('notifyForm');
+        const notifyButton = document.getElementById('notifyButton');
+        const successMessage = document.getElementById('successMessage');
+
+        // Input focus effects
+        emailInput.addEventListener('focus', () => {
+            inputGroup.classList.add('focused');
+        });
+
+        emailInput.addEventListener('blur', () => {
+            inputGroup.classList.remove('focused');
+        });
+
+        // Form submission with enhanced feedback
+        notifyForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (emailInput.value && emailInput.validity.valid) {
+                // Button loading state
+                notifyButton.textContent = 'Adding...';
+                notifyButton.style.background = 'linear-gradient(135deg, #6b7280, #4b5563)';
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Success state
+                    notifyButton.textContent = '✓ Added';
+                    notifyButton.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                    
+                    // Show success message
+                    successMessage.classList.add('show');
+                    
+                    // Clear input
+                    emailInput.value = '';
+                    
+                    // Reset after delay
+                    setTimeout(() => {
+                        notifyButton.textContent = 'Notify Me';
+                        notifyButton.style.background = 'linear-gradient(135deg, #f59e0b, #ea580c, #dc2626)';
+                        successMessage.classList.remove('show');
+                    }, 3000);
+                }, 1000);
             }
         });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+        // Enhanced social link interactions
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-6px) scale(1.05)';
             });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Smooth scroll effects for future use
+        let ticking = false;
+        
+        function updateScrollEffects() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.3;
+            
+            document.querySelector('.background-video').style.transform = `translateY(${rate}px)`;
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollEffects);
+                ticking = true;
+            }
         });
     </script>
 </body>
